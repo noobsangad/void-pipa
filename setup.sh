@@ -51,52 +51,6 @@ if ! ping -c 1 voidlinux.org &> /dev/null; then
     fi
 fi
 
-# Locale setup
-echo ""
-echo "Setting up system locale..."
-echo "Common locales:"
-echo "1) en_US.UTF-8 (US English)"
-echo "2) en_GB.UTF-8 (British English)"
-echo "3) de_DE.UTF-8 (German)"
-echo "4) fr_FR.UTF-8 (French)"
-echo "5) es_ES.UTF-8 (Spanish)"
-echo "6) it_IT.UTF-8 (Italian)"
-echo "7) ru_RU.UTF-8 (Russian)"
-echo "8) zh_CN.UTF-8 (Chinese Simplified)"
-echo "9) ja_JP.UTF-8 (Japanese)"
-echo "10) ko_KR.UTF-8 (Korean)"
-echo "11) Other (manually enter locale)"
-
-read -p "Select your locale [1-11]: " locale_choice
-
-case $locale_choice in
-    1) locale="en_US.UTF-8" ;;
-    2) locale="en_GB.UTF-8" ;;
-    3) locale="de_DE.UTF-8" ;;
-    4) locale="fr_FR.UTF-8" ;;
-    5) locale="es_ES.UTF-8" ;;
-    6) locale="it_IT.UTF-8" ;;
-    7) locale="ru_RU.UTF-8" ;;
-    8) locale="zh_CN.UTF-8" ;;
-    9) locale="ja_JP.UTF-8" ;;
-    10) locale="ko_KR.UTF-8" ;;
-    11)
-        echo "Please enter your locale (e.g., en_US.UTF-8):"
-        read locale
-        ;;
-    *) 
-        echo "Invalid choice. Setting to en_US.UTF-8."
-        locale="en_US.UTF-8"
-        ;;
-esac
-
-# Generate locale
-echo "$locale UTF-8" > /etc/locale.gen
-locale-gen
-echo "LANG=$locale" > /etc/locale.conf
-export LANG=$locale
-echo "Locale set to $locale"
-
 # System update
 echo ""
 echo "=== Updating system packages ==="
